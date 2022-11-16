@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
-
+/*
 public class TCPClient extends JFrame implements ActionListener {
 
     JTextArea area = new JTextArea();
@@ -40,5 +40,5 @@ public class TCPClient extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
     }
-}
+}*/
 
