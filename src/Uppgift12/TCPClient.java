@@ -7,15 +7,15 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
-/*
+
 public class TCPClient extends JFrame implements ActionListener {
 
     JTextArea area = new JTextArea();
     JScrollPane scroll = new JScrollPane(area);
     JTextField write = new JTextField();
-    private BufferedReader input;
-    private PrintWriter output;
     String name = "";
+
+    PrintWriter output;
 
     public TCPClient(){
         name = JOptionPane.showInputDialog(null, "Ange ditt chatt-alias");
@@ -28,16 +28,29 @@ public class TCPClient extends JFrame implements ActionListener {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        String hostName = "localhost";
+        String hostName = "127.0.0.1";
         int port = 1337;
 
-        try{
+        try(
+            Socket socket = new Socket(hostName, port);
+            PrintWriter output = new PrintWriter(socket.getOutputStream(),true);
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));){
 
+            String fromServer;
+
+            while((fromServer = input.readLine()) != null)
+                area.append(fromServer +"\n");
+
+        }catch(IOException e){
+            e.printStackTrace();
         }
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        output.println(name+": "+write.getText());
+        write.setText("");
     }
-}*/
+    public static void main(String[] args){
+        TCPClient client = new TCPClient();
+    }
+}

@@ -8,12 +8,11 @@ public class Server implements Serializable{
 
     Database db = new Database();
 
-
-    public Server(){
+    public Server() throws IOException {
         try(ServerSocket serverSocket = new ServerSocket(1337);
             Socket socket = serverSocket.accept();
             ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
         ){
 
             output.writeObject("Hej och välkommen! Skriv in ett regnummer: ");
@@ -31,7 +30,7 @@ public class Server implements Serializable{
             e.printStackTrace();
         }
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         new Server();
     }
 }

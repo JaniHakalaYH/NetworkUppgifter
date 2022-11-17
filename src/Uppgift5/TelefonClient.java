@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class TelefonClient {
 
-    private int port = 1337;
+    private final int port = 1337;
 
     public TelefonClient() throws UnknownHostException {
 

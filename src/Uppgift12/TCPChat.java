@@ -6,13 +6,17 @@ import java.net.Socket;
 
 public class TCPChat {
 
-    public static void main(String[] args) {
+    private static Multiwriter multiWriter = new Multiwriter();
+
+    public static void main(String[] args) throws IOException {
 
         while (true) {
+
             try (ServerSocket serverSocket = new ServerSocket(1337);) {
                 Socket clientSocket = serverSocket.accept();
-                ClientHandler clientHandler = new ClientHandler(clientSocket);
+                Handler clientHandler = new Handler(clientSocket, multiWriter);
                 clientHandler.start();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
